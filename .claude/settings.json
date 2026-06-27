@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx cypress *)",
+      "PowerShell(npx cypress run --spec \"cypress/e2e/customer-search.cy.ts\")",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(chromium-cli --help)",
+      "Bash(npx playwright *)",
+      "Bash(node -e \"console.log\\(require.resolve\\('playwright', {paths:['c:/ai_lab_2026/EAP_Ang_Prj/node_modules']}\\)\\)\")",
+      "Bash(NODE_PATH=\"c:/ai_lab_2026/EAP_Ang_Prj/node_modules\" node verify.js)",
+      "Bash(npm init *)",
+      "Bash(node verify.js)"
+    ]
+  }
+}

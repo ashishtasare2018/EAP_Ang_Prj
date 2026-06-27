@@ -1,0 +1,62 @@
+<section class="customer-search">
+  <label class="customer-search__label" for="customer-search-input">Search customers</label>
+
+  <form class="customer-search__form" (ngSubmit)="onSearch()">
+    <input
+      id="customer-search-input"
+      type="text"
+      pInputText
+      class="p-inputtext p-component customer-search__input"
+      role="searchbox"
+      aria-label="Search customers"
+      aria-describedby="search-hint"
+      [formControl]="searchControl"
+    />
+    <button
+      type="submit"
+      pButton
+      label="Search"
+      icon="pi pi-search"
+      aria-label="Search customers"
+      class="customer-search__submit"
+    ></button>
+  </form>
+
+  <p id="search-hint" class="customer-search__hint">Search by ID, name or email address</p>
+
+  <div
+    class="customer-search__results"
+    aria-live="polite"
+    aria-atomic="true"
+    [attr.aria-busy]="searchState() === 'loading'"
+  >
+    @if (searchState() === 'loading') {
+      <div data-testid="search-loading" class="customer-search__loading" aria-hidden="true">
+        <p-skeleton width="60%" height="1.5rem" styleClass="customer-search__skeleton-line" />
+        <p-skeleton width="40%" height="1rem" styleClass="customer-search__skeleton-line" />
+        <p-skeleton width="100%" height="4rem" styleClass="customer-search__skeleton-line" />
+      </div>
+      <span class="customer-search__visually-hidden">Searching customers…</span>
+    }
+
+    @if (customer(); as cust) {
+      <app-customer-card data-testid="search-result-card" [customer]="cust" />
+    }
+
+    @if (searchState() === 'not-found') {
+      <p-message severity="info" text="Customer not found" />
+    }
+
+    @if (searchState() === 'invalid') {
+      <p-message
+        severity="warn"
+        role="alert"
+        [text]="validationError() ?? 'Enter a valid ID, name, or email address.'"
+      />
+    }
+
+    @if (searchState() === 'error') {
+      <p-message severity="error" role="alert" text="Something went wrong. Please try again." />
+    }
+  </div>
+</section>

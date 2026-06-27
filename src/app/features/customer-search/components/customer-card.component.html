@@ -1,0 +1,39 @@
+<p-card role="region" aria-label="Customer details" styleClass="customer-card">
+  <ng-template pTemplate="title">
+    <span class="customer-card__name">{{ customer().name }}</span>
+  </ng-template>
+
+  <p class="customer-card__username">&#64;{{ customer().username }}</p>
+
+  <p>
+    <a
+      [href]="'mailto:' + customer().email"
+      [attr.aria-label]="'Email ' + customer().name + ' at ' + customer().email"
+    >{{ customer().email }}</a>
+  </p>
+
+  <p class="customer-card__phone">{{ customer().phone }}</p>
+
+  <p>
+    <a
+      [href]="'https://' + customer().website"
+      target="_blank"
+      rel="noopener noreferrer"
+      [attr.aria-label]="'Visit ' + customer().name + ' website (opens in a new tab)'"
+    >{{ customer().website }}</a>
+  </p>
+
+  <p-divider />
+
+  <address class="customer-card__address">
+    {{ customer().address.street }}, {{ customer().address.suite }}<br />
+    {{ customer().address.city }}, {{ customer().address.zipcode }}
+  </address>
+
+  <p-divider />
+
+  <p class="customer-card__company">
+    <strong>{{ customer().company.name }}</strong><br />
+    {{ customer().company.catchPhrase }}
+  </p>
+</p-card>

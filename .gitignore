@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out-tsc/
+coverage/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.log
+.DS_Store

@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view *)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npx jest *)",
+      "Bash(npx eslint *)",
+      "Bash(npx ng *)",
+      "Bash(cd \"c:\\\\ai_lab_2026\\\\EAP_Ang_Prj\" && rm -f src/app/features/customer-search/services/search-history.service.ts src/app/features/customer-search/__tests__/search-history.service.spec.ts && echo done)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\ashis\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--ai-lab-2026-EAP-Ang-Prj\\\\a5c7c064-cc72-426f-8d45-fc7e723ca911\\\\scratchpad\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4200/)",
+      "Bash(node -e \"console.log\\(require\\('./package-lock.json'\\).lockfileVersion\\)\")",
+      "Bash(npm --version)",
+      "Bash(npm audit *)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(node *)",
+      "Bash(npm ls *)",
+      "Bash(npx vitest *)",
+      "Bash(awk 'NR==282,NR==282+5' node_modules/primeng/types/primeng-button.d.ts)",
+      "Bash(awk '/declare class ButtonDirective/,/^}/' node_modules/primeng/types/primeng-button.d.ts)",
+      "Bash(awk '/declare class InputText /,/^}/' node_modules/primeng/types/primeng-inputtext.d.ts)",
+      "Bash(awk '/declare class Skeleton /,/^}/' node_modules/primeng/types/primeng-skeleton.d.ts)",
+      "Bash(awk '/declare class Message /,/^}/' node_modules/primeng/types/primeng-message.d.ts)",
+      "Bash(awk '/declare class Card /,/^}/' node_modules/primeng/types/primeng-card.d.ts)",
+      "Bash(awk '/declare class Divider /,/^}/' node_modules/primeng/types/primeng-divider.d.ts)",
+      "Bash(npm run *)",
+      "Bash(npm sbom *)",
+      "Bash(echo \"started with pid $!\")",
+      "Bash(curl *)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill *)",
+      "Bash(echo \"exit code: $?\")",
+      "Bash(npm test *)",
+      "Bash(echo \"Exit code: $?\")",
+      "PowerShell(npm audit *)"
+    ],
+    "additionalDirectories": [
+      "c:\\ai_lab_2026\\EAP_Ang_Prj\\src\\app\\features\\customer-search\\services"
+    ]
+  }
+}

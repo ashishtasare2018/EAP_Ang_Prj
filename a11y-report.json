@@ -1,0 +1,32 @@
+{
+  "idle": {
+    "violationCount": 0,
+    "criticalOrSeriousCount": 0,
+    "violations": []
+  },
+  "loading": {
+    "violationCount": 0,
+    "criticalOrSeriousCount": 0,
+    "violations": []
+  },
+  "found": {
+    "violationCount": 0,
+    "criticalOrSeriousCount": 0,
+    "violations": []
+  },
+  "not-found": {
+    "violationCount": 0,
+    "criticalOrSeriousCount": 0,
+    "violations": []
+  },
+  "invalid": {
+    "violationCount": 0,
+    "criticalOrSeriousCount": 0,
+    "violations": []
+  },
+  "error": {
+    "violationCount": 0,
+    "criticalOrSeriousCount": 0,
+    "violations": []
+  }
+}

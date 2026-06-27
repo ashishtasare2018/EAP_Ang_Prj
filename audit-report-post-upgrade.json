@@ -1,0 +1,171 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@angular/build": {
+      "name": "@angular/build",
+      "severity": "low",
+      "isDirect": true,
+      "via": [
+        "@angular/compiler-cli"
+      ],
+      "effects": [],
+      "range": "<=21.2.17",
+      "nodes": [
+        "node_modules/@angular/build"
+      ],
+      "fixAvailable": {
+        "name": "@angular/build",
+        "version": "22.0.4",
+        "isSemVerMajor": true
+      }
+    },
+    "@angular/compiler-cli": {
+      "name": "@angular/compiler-cli",
+      "severity": "low",
+      "isDirect": true,
+      "via": [
+        "@babel/core"
+      ],
+      "effects": [
+        "@angular/build"
+      ],
+      "range": "15.1.0-next.0 - 22.0.2",
+      "nodes": [
+        "node_modules/@angular/compiler-cli"
+      ],
+      "fixAvailable": {
+        "name": "@angular/compiler-cli",
+        "version": "15.0.4",
+        "isSemVerMajor": true
+      }
+    },
+    "@babel/core": {
+      "name": "@babel/core",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1120793,
+          "name": "@babel/core",
+          "dependency": "@babel/core",
+          "title": "@babel/core: Arbitrary File Read via sourceMappingURL Comment",
+          "url": "https://github.com/advisories/GHSA-4x5r-pxfx-6jf8",
+          "severity": "low",
+          "cwe": [
+            "CWE-22",
+            "CWE-200"
+          ],
+          "cvss": {
+            "score": 3.2,
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:C/C:L/I:N/A:N"
+          },
+          "range": "<=7.29.0"
+        }
+      ],
+      "effects": [
+        "@angular/compiler-cli"
+      ],
+      "range": "<=7.29.0",
+      "nodes": [
+        "node_modules/@angular/compiler-cli/node_modules/@babel/core"
+      ],
+      "fixAvailable": {
+        "name": "@angular/compiler-cli",
+        "version": "15.0.4",
+        "isSemVerMajor": true
+      }
+    },
+    "@cypress/request": {
+      "name": "@cypress/request",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "cypress"
+      ],
+      "range": "<=3.0.10",
+      "nodes": [
+        "node_modules/@cypress/request"
+      ],
+      "fixAvailable": {
+        "name": "cypress",
+        "version": "15.18.0",
+        "isSemVerMajor": true
+      }
+    },
+    "cypress": {
+      "name": "cypress",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@cypress/request"
+      ],
+      "effects": [],
+      "range": "4.3.0 - 15.14.2",
+      "nodes": [
+        "node_modules/cypress"
+      ],
+      "fixAvailable": {
+        "name": "cypress",
+        "version": "15.18.0",
+        "isSemVerMajor": true
+      }
+    },
+    "uuid": {
+      "name": "uuid",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1119441,
+          "name": "uuid",
+          "dependency": "uuid",
+          "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+          "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-787",
+            "CWE-1285"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<11.1.1"
+        }
+      ],
+      "effects": [
+        "@cypress/request"
+      ],
+      "range": "<11.1.1",
+      "nodes": [
+        "node_modules/uuid"
+      ],
+      "fixAvailable": {
+        "name": "cypress",
+        "version": "15.18.0",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 3,
+      "moderate": 3,
+      "high": 0,
+      "critical": 0,
+      "total": 6
+    },
+    "dependencies": {
+      "prod": 22,
+      "dev": 820,
+      "optional": 128,
+      "peer": 4,
+      "peerOptional": 0,
+      "total": 842
+    }
+  }
+}
