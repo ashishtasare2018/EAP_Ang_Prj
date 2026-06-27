@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
+    "postinstall": "node scripts/patch-angular-linker.cjs",
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production",

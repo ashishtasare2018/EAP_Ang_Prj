@@ -146,6 +146,8 @@ export {
   getDOM,
   setRootDomAdapter,
   DomAdapter,
-  PlatformLocation
+  PlatformLocation,
+  LOCATION_INITIALIZED,
+  BrowserPlatformLocation
 };
-//# sourceMappingURL=chunk-D4KB2JI6.js.map
+//# sourceMappingURL=chunk-ZFELSTZA.js.map

@@ -33,7 +33,21 @@
       "Bash(echo \"exit code: $?\")",
       "Bash(npm test *)",
       "Bash(echo \"Exit code: $?\")",
-      "PowerShell(npm audit *)"
+      "PowerShell(npm audit *)",
+      "PowerShell(node -e \"const p = require\\('./node_modules/@babel/core/package.json'\\); console.log\\('@babel/core:', p.version\\)\")",
+      "PowerShell(node -e \"const p = require\\('./node_modules/@babel/types/package.json'\\); console.log\\('@babel/types:', p.version\\)\")",
+      "PowerShell(node -e \"const p = require\\('./node_modules/primeng/package.json'\\); console.log\\('primeng:', p.version\\)\")",
+      "PowerShell(node -e \"const p = require\\('./node_modules/@angular/core/package.json'\\); console.log\\('@angular/core:', p.version\\); const b = require\\('./node_modules/@angular/build/package.json'\\); console.log\\('@angular/build:', b.version\\)\")",
+      "PowerShell(Get-Content \"node_modules\\\\@angular\\\\build\\\\src\\\\builders\\\\dev-server\\\\builder.js\" | Where-Object { $_ -match \"prebundle\" } | Select-Object -First 10)",
+      "PowerShell(node -e \"const p = require\\('./node_modules/@angular/compiler-cli/package.json'\\); console.log\\('@angular/compiler-cli:', p.version\\)\")",
+      "PowerShell(node -e \"const p = require\\('./node_modules/@babel/core/node_modules/@babel/types/package.json'\\); console.log\\('@babel/types \\(under @babel/core\\):', p.version\\)\" 2>&1; node -e \"const p = require\\('./node_modules/@angular/compiler-cli/node_modules/@babel/types/package.json'\\); console.log\\('@babel/types \\(under compiler-cli\\):', p.version\\)\" 2>&1)",
+      "PowerShell(node -e \"const bt = require\\('./node_modules/@babel/types'\\); console.log\\('root @babel/types version:', bt.VISITOR_KEYS ? '\\(has VISITOR_KEYS\\)' : 'unknown'\\); const p = require\\('./node_modules/@babel/types/package.json'\\); console.log\\('version:', p.version\\)\")",
+      "PowerShell(Get-ChildItem \"node_modules\\\\@angular\\\\compiler-cli\\\\node_modules\\\\@babel\\\\\" | Select-Object Name; node -e \"const p = require\\('./node_modules/@angular/compiler-cli/node_modules/@babel/core/package.json'\\); console.log\\('compiler-cli nested @babel/core:', p.version\\)\")",
+      "PowerShell(cmd /c \"dir node_modules\\\\@angular\\\\compiler-cli\\\\node_modules\\\\@babel /b /a\")",
+      "PowerShell(Get-ChildItem \"node_modules\\\\@babel\\\\core\\\\node_modules\\\\@babel\\\\types\\\\\" | Select-Object Name | Select-Object -First 10; node -e \"const t = require\\('./node_modules/@babel/core/node_modules/@babel/types'\\); try { t.numericLiteral\\(-1\\); console.log\\('allows -1'\\) } catch\\(e\\) { console.log\\('rejects -1:', e.message.substring\\(0, 80\\)\\) }\")",
+      "PowerShell(node -e \"const p = require\\('./node_modules/@angular/compiler/package.json'\\); console.log\\('@angular/compiler:', p.version\\)\")",
+      "PowerShell(npm info *)",
+      "PowerShell(node scripts/patch-angular-linker.cjs)"
     ],
     "additionalDirectories": [
       "c:\\ai_lab_2026\\EAP_Ang_Prj\\src\\app\\features\\customer-search\\services"

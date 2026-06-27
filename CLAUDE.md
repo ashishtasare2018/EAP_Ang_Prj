@@ -2,7 +2,7 @@
 
 > This file guides Claude CLI on how to work within this Angular project.
 > Claude reads this automatically when running in this directory.
-> Last compliance update: 2026-06-25 (Angular 21 · Vitest 4 · Zoneless · Node 24 — versions verified against the actual installed packages after a live migration, not just the target spec)
+> Last compliance update: 2026-06-26 (Angular 21 · Vitest 4 · Zoneless · Node 24 — versions verified against the actual installed packages after a live migration, not just the target spec)
 
 ---
 
@@ -38,6 +38,7 @@
 | `typescript` | `^5.9.0` | **Not `~5.6.0`** — `@angular/build@21.2.17`'s real published peer range is `>=5.9 <6.0` |
 | `@angular/build` | `^21.0.0` | Replaces `@angular-devkit/build-angular`. Pins `undici` to an exact vulnerable version (`7.24.4`) — see `package.json`'s `overrides` block |
 | `eslint` | `^9.0.0` | ESLint 8 is EOL. Flat config (`eslint.config.js`) replaces `.eslintrc.json`; `no-undef` must stay disabled for `.ts` files (TS's own compiler covers it; the rule can't see ambient/Vitest globals) |
+| `@babel/core` | `>=7.30.0` (override) | Forces a modern Babel core so the Angular Linker patch (see below) operates against a consistent `@babel/types` API. Applied via `package.json` `overrides`, not as a direct dependency. |
 
 Run `npm audit --audit-level=high` before every commit. Zero high/critical CVEs permitted in production dependencies.
 
@@ -268,6 +269,10 @@ Error messages must never expose internal error details, stack traces, or HTTP s
 ## Commands Reference
 
 ```bash
+# Apply Angular Linker patch (runs automatically via postinstall; re-run manually
+# after any npm install that bumps @angular/compiler-cli)
+node scripts/patch-angular-linker.cjs
+
 # Development
 ng serve
 
@@ -307,6 +312,29 @@ ng build --configuration production
 
 ---
 
+## Known Issues & Active Workarounds
+
+### Angular Linker — negative numeric literal bug (Angular 21.2.x + PrimeNG 21.1.x)
+
+**Symptom:** `npm start` or `ng build` fails with:
+```
+Cannot create property 'message' on string '...primeng-message.mjs:
+NumericLiterals must be non-negative finite numbers. You can use t.valueToNode(-1) instead.'
+[plugin angular-compiler]
+```
+
+**Root cause:** `@angular/compiler-cli@21.2.x`'s Babel Linker plugin (`BabelAstFactory.createLiteral`) calls `t.numericLiteral(value)` for all numbers. PrimeNG 21.1.x's `Message`, `SpeedDial`, `Table`, `Tree`, and `TreeTable` components use Angular 21.2.x's `animate.enter`/`animate.leave` host bindings, which cause the Linker to emit a **negative** numeric literal. Both `@babel/types@7.x` and `@babel/types@8.x` reject `numericLiteral(-n)` — the correct Babel AST for `-n` is `unaryExpression('-', numericLiteral(n))`.
+
+**Active fixes (both must be in place):**
+
+1. **`scripts/patch-angular-linker.cjs`** — patches the single offending line in `node_modules/@angular/compiler-cli/bundles/linker/babel/index.js` at postinstall time. The patch changes `t.numericLiteral(value)` to `value < 0 ? t.unaryExpression("-", t.numericLiteral(-value)) : t.numericLiteral(value)`. Run manually with `node scripts/patch-angular-linker.cjs` after any `npm install` that touches `@angular/compiler-cli`.
+
+2. **`angular.json` `serve.options.prebundle.exclude: ["primeng"]`** — prevents Vite's dep-optimisation step from also running the Linker on PrimeNG during HMR re-optimisation (a separate code path from the main compiler plugin that hits the same bug). PrimeNG is still bundled into the app by esbuild; only the Vite pre-bundling step is skipped.
+
+**Remove both fixes** once Angular ships an upstream Linker fix (expected in a `21.2.x` patch). Verify the fix is no longer needed by temporarily reverting the patch script and confirming `npm start` succeeds.
+
+---
+
 ## Dependencies
 
 ```json
@@ -340,7 +368,7 @@ ng build --configuration production
     "@vitest/browser": "^4.0.8",
     "@vitest/coverage-v8": "^4.0.8",
     "axe-core": "^4.10.0",
-    "cypress": "^13.0.0",
+    "cypress": "^15.18.0",
     "cypress-real-events": "^1.13.0",
     "eslint": "^9.0.0",
     "jsdom": "^25.0.0",
@@ -352,12 +380,15 @@ ng build --configuration production
   "overrides": {
     "undici": "^7.28.0",
     "qs": "^6.15.2",
-    "esbuild": "^0.28.1"
+    "esbuild": "^0.28.1",
+    "@babel/core": ">=7.30.0"
   }
 }
 ```
 
-The three `overrides` entries pin transitive dependencies that `@angular/build`, `vite`, and `@cypress/request` each pinned to an exact or too-narrow vulnerable version. Re-check whether they're still needed after any future `@angular/build`/`vite`/`cypress` bump — `npm audit` will tell you if the upstream package has since published its own fix.
+The four `overrides` entries:
+- `undici`, `qs`, `esbuild` — pin transitive dependencies that `@angular/build`, `vite`, and `@cypress/request` each pinned to an exact or too-narrow vulnerable version. Re-check after any future `@angular/build`/`vite`/`cypress` bump.
+- `@babel/core` — forces a modern Babel core across the tree as part of the Angular Linker workaround (see **Known Issues & Active Workarounds** above). Remove once the upstream Linker fix ships.
 
 ---
 

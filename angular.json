@@ -49,6 +49,11 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "prebundle": {
+              "exclude": ["primeng"]
+            }
+          },
           "configurations": {
             "production": {
               "buildTarget": "customer-search-app:build:production"
