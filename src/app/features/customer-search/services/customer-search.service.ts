@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiHttpClientService } from './api-http-client.service';
 import { Customer, SearchType, SearchValidationResult } from '../models';
 
 const ID_PATTERN: RegExp = /^\d+$/;
@@ -17,7 +18,7 @@ const INVALID_QUERY_MESSAGE: string = 'Enter a valid ID, name, or email address.
  */
 @Injectable({ providedIn: 'root' })
 export class CustomerSearchService {
-  private readonly http: HttpClient = inject(HttpClient);
+  private readonly apiHttp: ApiHttpClientService = inject(ApiHttpClientService);
   private readonly BASE_URL: string = 'https://jsonplaceholder.typicode.com/users/';
 
   /**
@@ -32,7 +33,7 @@ export class CustomerSearchService {
     const searchType: SearchType = validation.searchType ?? 'username';
     const params: HttpParams = new HttpParams().set(searchType, query);
 
-    return this.http.get<Customer[]>(this.BASE_URL, { params });
+    return this.apiHttp.get<Customer[]>(this.BASE_URL, params);
   }
 
   /**
