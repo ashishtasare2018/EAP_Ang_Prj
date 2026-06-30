@@ -47,7 +47,15 @@
       "PowerShell(Get-ChildItem \"node_modules\\\\@babel\\\\core\\\\node_modules\\\\@babel\\\\types\\\\\" | Select-Object Name | Select-Object -First 10; node -e \"const t = require\\('./node_modules/@babel/core/node_modules/@babel/types'\\); try { t.numericLiteral\\(-1\\); console.log\\('allows -1'\\) } catch\\(e\\) { console.log\\('rejects -1:', e.message.substring\\(0, 80\\)\\) }\")",
       "PowerShell(node -e \"const p = require\\('./node_modules/@angular/compiler/package.json'\\); console.log\\('@angular/compiler:', p.version\\)\")",
       "PowerShell(npm info *)",
-      "PowerShell(node scripts/patch-angular-linker.cjs)"
+      "PowerShell(node scripts/patch-angular-linker.cjs)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(npm approve-scripts *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(choco install *)",
+      "PowerShell(winget install *)",
+      "PowerShell(gh *)"
     ],
     "additionalDirectories": [
       "c:\\ai_lab_2026\\EAP_Ang_Prj\\src\\app\\features\\customer-search\\services"
