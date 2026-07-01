@@ -269,4 +269,55 @@ describe('CustomerSearchComponent', () => {
     expect(component.searchState()).toBe('error');
     expect(component.customer()).toBeNull();
   });
+
+  it('should disable the Search button while the input is empty', () => {
+    fixture.detectChanges();
+
+    const button: HTMLButtonElement | null = fixture.nativeElement.querySelector(
+      'button[type="submit"]',
+    );
+
+    expect(component.isSearchDisabled()).toBe(true);
+    expect(button?.disabled).toBe(true);
+  });
+
+  it('should disable the Search button when the input contains only whitespace', () => {
+    component.searchControl.setValue('   ');
+    fixture.detectChanges();
+
+    const button: HTMLButtonElement | null = fixture.nativeElement.querySelector(
+      'button[type="submit"]',
+    );
+
+    expect(component.isSearchDisabled()).toBe(true);
+    expect(button?.disabled).toBe(true);
+  });
+
+  it('should enable the Search button once the user enters text', () => {
+    component.searchControl.setValue('Sam');
+    fixture.detectChanges();
+
+    const button: HTMLButtonElement | null = fixture.nativeElement.querySelector(
+      'button[type="submit"]',
+    );
+
+    expect(component.isSearchDisabled()).toBe(false);
+    expect(button?.disabled).toBe(false);
+  });
+
+  it('should re-disable the Search button after the input is cleared again', () => {
+    component.searchControl.setValue('Sam');
+    fixture.detectChanges();
+    expect(component.isSearchDisabled()).toBe(false);
+
+    component.searchControl.setValue('');
+    fixture.detectChanges();
+
+    const button: HTMLButtonElement | null = fixture.nativeElement.querySelector(
+      'button[type="submit"]',
+    );
+
+    expect(component.isSearchDisabled()).toBe(true);
+    expect(button?.disabled).toBe(true);
+  });
 });

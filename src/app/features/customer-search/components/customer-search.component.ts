@@ -3,11 +3,13 @@ import {
   Component,
   DestroyRef,
   OnInit,
+  Signal,
   WritableSignal,
+  computed,
   inject,
   signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
 import { ButtonDirective } from 'primeng/button';
@@ -52,6 +54,12 @@ export class CustomerSearchComponent implements OnInit {
   readonly searchState: WritableSignal<SearchState> = signal<SearchState>('idle');
   readonly customer: WritableSignal<Customer | null> = signal<Customer | null>(null);
   readonly validationError: WritableSignal<string | null> = signal<string | null>(null);
+
+  private readonly queryValue: Signal<string> = toSignal(this.searchControl.valueChanges, {
+    initialValue: this.searchControl.value,
+  });
+  /** Search button stays disabled until the user has entered non-whitespace text. */
+  readonly isSearchDisabled: Signal<boolean> = computed(() => this.queryValue().trim().length === 0);
 
   /** @inheritdoc */
   ngOnInit(): void {
