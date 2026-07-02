@@ -30,6 +30,12 @@
   &__input {
     flex: 1 1 auto;
     width: auto;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  &__submit {
+    min-height: 44px;
   }
 
   &__hint {
