@@ -5,6 +5,7 @@ node_modules/
 dist/
 out-tsc/
 coverage/
+.angular/
 
 # Cypress
 cypress/videos/

@@ -55,7 +55,12 @@
       "PowerShell(Get-Command *)",
       "PowerShell(choco install *)",
       "PowerShell(winget install *)",
-      "PowerShell(gh *)"
+      "PowerShell(gh *)",
+      "Bash(git status *)",
+      "Bash(gh pr *)",
+      "Bash(powershell -Command \"Get-ChildItem -Recurse .claude/skills\")",
+      "Bash(rm .claude/skills/pr-review/commit-message-format.md)",
+      "Bash(git rm *)"
     ],
     "additionalDirectories": [
       "c:\\ai_lab_2026\\EAP_Ang_Prj\\src\\app\\features\\customer-search\\services"
