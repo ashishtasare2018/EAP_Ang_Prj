@@ -5,6 +5,7 @@ node_modules/
 dist/
 out-tsc/
 coverage/
+.angular/
 
 # Cypress
 cypress/videos/
@@ -18,3 +19,4 @@ cypress/downloads/
 # Misc
 *.log
 .DS_Store
+.gstack/
