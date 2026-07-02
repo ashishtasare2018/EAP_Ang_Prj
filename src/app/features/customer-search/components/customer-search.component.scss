@@ -12,13 +12,13 @@
   width: 100%;
   max-width: 32rem;
   padding: 1.5rem;
-  background-color: var(--surface-card);
-  border: 1px solid var(--surface-border);
-  border-radius: var(--border-radius);
+  background-color: var(--p-content-background);
+  border: 1px solid var(--p-content-border-color);
+  border-radius: var(--p-border-radius-md);
 
   &__label {
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--p-text-color);
   }
 
   &__form {
@@ -35,7 +35,7 @@
   &__hint {
     margin: 0;
     font-size: 0.875rem;
-    color: var(--text-color-secondary);
+    color: var(--p-text-muted-color);
   }
 
   &__results {
