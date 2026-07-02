@@ -19,3 +19,4 @@ cypress/downloads/
 # Misc
 *.log
 .DS_Store
+.gstack/
